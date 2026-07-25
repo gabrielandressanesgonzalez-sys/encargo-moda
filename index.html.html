@@ -1,0 +1,644 @@
+  <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TAILORSNELCY — Ropa Hecha por Encargo</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:       #1A1210;
+      --gold:      #C9A96E;
+      --cream:     #F5F0E8;
+      --warm-grey: #7A6E65;
+      --rust:      #8B4A3C;
+      --white:     #FDFBF8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--ink);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.2rem 4vw;
+      background: rgba(253,251,248,.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(201,169,110,.2);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; letter-spacing: .18em;
+      color: var(--ink); text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      font-size: .78rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--warm-grey);
+      text-decoration: none; transition: color .25s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      font-size: .78rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; color: var(--white);
+      background: var(--ink); padding: .6rem 1.4rem;
+      text-decoration: none; transition: background .25s;
+    }
+    .nav-cta:hover { background: var(--gold); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 72px;
+    }
+    .hero-left {
+      background: var(--cream);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 6vw 5vw 6vw 8vw;
+    }
+    .hero-eyebrow {
+      font-size: .72rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 1.1; color: var(--ink);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title em { font-style: italic; color: var(--rust); }
+    .hero-body {
+      font-size: 1rem; color: var(--warm-grey);
+      max-width: 34ch; margin-bottom: 3rem; line-height: 1.8;
+    }
+    .btn-primary {
+      display: inline-block;
+      font-size: .8rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--white); background: var(--rust);
+      padding: 1rem 2.4rem;
+      transition: background .25s, transform .2s;
+    }
+    .btn-primary:hover { background: var(--ink); transform: translateY(-2px); }
+    .btn-secondary {
+      display: inline-block; margin-left: 1.4rem;
+      font-size: .78rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--ink); border-bottom: 1.5px solid var(--gold);
+      padding-bottom: .15rem; transition: color .25s;
+    }
+    .btn-secondary:hover { color: var(--gold); }
+
+    .hero-right {
+      position: relative; overflow: hidden;
+    }
+    .hero-right img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center top;
+      filter: sepia(12%) brightness(.96);
+    }
+    .hero-badge {
+      position: absolute; bottom: 2.5rem; left: 2rem;
+      background: var(--white); padding: 1.1rem 1.4rem;
+      border-left: 3px solid var(--gold);
+    }
+    .hero-badge strong {
+      display: block; font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; color: var(--ink);
+    }
+    .hero-badge span {
+      font-size: .72rem; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--warm-grey);
+    }
+
+    /* ── PROCESO ── */
+    .proceso {
+      background: var(--ink);
+      padding: 6rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem; align-items: start;
+    }
+    .proceso-label {
+      font-size: .72rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold);
+      padding-top: .4rem;
+    }
+    .proceso-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+    .proceso-step { border-top: 1px solid rgba(201,169,110,.25); padding-top: 1.4rem; }
+    .paso-num {
+      font-family: 'Playfair Display', serif; font-size: .9rem;
+      color: var(--gold); margin-bottom: .5rem;
+    }
+    .paso-titulo {
+      font-family: 'Playfair Display', serif; font-size: 1.25rem;
+      color: var(--white); margin-bottom: .6rem;
+    }
+    .paso-desc { font-size: .88rem; color: rgba(245,240,232,.55); line-height: 1.75; }
+
+    /* ── CATÁLOGO ── */
+    .catalogo { padding: 6rem 6vw; }
+    .section-header {
+      display: flex; align-items: baseline; justify-content: space-between;
+      margin-bottom: 3.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem); color: var(--ink);
+    }
+    .section-title em { font-style: italic; color: var(--gold); }
+    .see-all {
+      font-size: .76rem; font-weight: 600; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--rust);
+      text-decoration: none; border-bottom: 1px solid var(--rust);
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .product-card { position: relative; cursor: pointer; }
+    .product-img-wrap {
+      overflow: hidden; aspect-ratio: 3/4;
+      background: var(--cream); margin-bottom: 1rem;
+    }
+    .product-img-wrap img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .5s ease, filter .4s;
+      filter: sepia(8%);
+    }
+    .product-card:hover .product-img-wrap img {
+      transform: scale(1.04); filter: sepia(0%);
+    }
+    .product-tag {
+      position: absolute; top: 1rem; left: 1rem;
+      font-size: .65rem; font-weight: 600; letter-spacing: .12em;
+      text-transform: uppercase; background: var(--gold);
+      color: var(--white); padding: .3rem .7rem;
+    }
+    .product-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; color: var(--ink); margin-bottom: .25rem;
+    }
+    .product-desc { font-size: .82rem; color: var(--warm-grey); margin-bottom: .5rem; }
+    .product-price {
+      font-size: .9rem; font-weight: 600; color: var(--rust);
+    }
+
+    /* ── MATERIALES ── */
+    .materiales {
+      background: var(--cream);
+      padding: 6rem 8vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5vw; align-items: center;
+    }
+    .mat-img-wrap {
+      position: relative;
+    }
+    .mat-img-wrap img {
+      width: 100%; aspect-ratio: 4/5; object-fit: cover;
+      filter: sepia(10%);
+    }
+    .mat-img-accent {
+      position: absolute; bottom: -2rem; right: -2rem;
+      width: 55%; aspect-ratio: 1;
+      border: 6px solid var(--white);
+      overflow: hidden;
+    }
+    .mat-img-accent img { width: 100%; height: 100%; object-fit: cover; filter: sepia(10%); }
+
+    .mat-content { padding-left: 2vw; }
+    .mat-eyebrow {
+      font-size: .72rem; font-weight: 600; letter-spacing: .22em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem;
+    }
+    .mat-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem); line-height: 1.2;
+      color: var(--ink); margin-bottom: 1.5rem;
+    }
+    .mat-title em { font-style: italic; color: var(--rust); }
+    .mat-body { font-size: .95rem; color: var(--warm-grey); line-height: 1.85; margin-bottom: 2.5rem; }
+
+    .mat-list { list-style: none; display: flex; flex-direction: column; gap: .8rem; }
+    .mat-list li {
+      display: flex; align-items: center; gap: .9rem;
+      font-size: .88rem; color: var(--ink);
+    }
+    .mat-list li::before {
+      content: ''; display: block; width: 28px; height: 1.5px;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* ── TESTIMONIOS ── */
+    .testimonios {
+      padding: 6rem 8vw;
+      text-align: center;
+    }
+    .testimonios .section-title { margin-bottom: 3.5rem; }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 2rem; text-align: left;
+    }
+    .testi-card {
+      padding: 2rem 1.8rem;
+      border: 1px solid rgba(201,169,110,.2);
+      position: relative;
+    }
+    .testi-quote {
+      font-family: 'Playfair Display', serif; font-size: 3rem;
+      color: var(--gold); line-height: 1; margin-bottom: .5rem;
+    }
+    .testi-text {
+      font-size: .92rem; color: var(--warm-grey);
+      line-height: 1.8; font-style: italic; margin-bottom: 1.5rem;
+    }
+    .testi-author { font-weight: 600; font-size: .8rem; color: var(--ink); }
+    .testi-city { font-size: .75rem; color: var(--gold); letter-spacing: .1em; }
+
+    /* ── CTA FINAL ── */
+    .cta-final {
+      background: var(--ink);
+      padding: 7rem 8vw;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4vw; align-items: center;
+    }
+    .cta-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 3.5vw, 3.2rem); color: var(--white);
+      line-height: 1.15;
+    }
+    .cta-title em { font-style: italic; color: var(--gold); }
+    .cta-right { display: flex; flex-direction: column; gap: 1.8rem; }
+    .cta-body { font-size: .95rem; color: rgba(245,240,232,.6); line-height: 1.8; }
+    .form-row { display: flex; gap: 1rem; }
+    .form-input {
+      flex: 1; background: rgba(255,255,255,.06);
+      border: 1px solid rgba(201,169,110,.3);
+      color: var(--white); padding: .85rem 1.1rem;
+      font-family: 'Raleway', sans-serif; font-size: .88rem;
+      outline: none; transition: border-color .25s;
+    }
+    .form-input::placeholder { color: rgba(245,240,232,.3); }
+    .form-input:focus { border-color: var(--gold); }
+    .form-textarea {
+      width: 100%; min-height: 100px; resize: vertical;
+    }
+    .btn-gold {
+      background: var(--gold); color: var(--ink);
+      border: none; padding: 1rem 2.4rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: .8rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; cursor: pointer;
+      transition: background .25s, transform .2s;
+    }
+    .btn-gold:hover { background: var(--rust); color: var(--white); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #110D0B; padding: 3rem 8vw;
+      display: grid; grid-template-columns: 2fr 1fr 1fr;
+      gap: 3rem;
+    }
+    .footer-brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; letter-spacing: .18em; color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .footer-brand-name span { color: var(--gold); }
+    .footer-tagline { font-size: .8rem; color: rgba(245,240,232,.35); margin-bottom: 1.5rem; }
+    .footer-social { display: flex; gap: 1.2rem; }
+    .footer-social a {
+      font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gold); text-decoration: none;
+      transition: opacity .2s;
+    }
+    .footer-social a:hover { opacity: .6; }
+    .footer-col-title {
+      font-size: .72rem; font-weight: 600; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .footer-col ul a {
+      font-size: .82rem; color: rgba(245,240,232,.45);
+      text-decoration: none; transition: color .2s;
+    }
+    .footer-col ul a:hover { color: var(--cream); }
+    .footer-bottom {
+      background: #0D0A09; padding: 1.2rem 8vw;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .footer-bottom p { font-size: .72rem; color: rgba(245,240,232,.25); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-right { height: 55vw; }
+      .proceso { grid-template-columns: 1fr; }
+      .product-grid { grid-template-columns: 1fr 1fr; }
+      .materiales { grid-template-columns: 1fr; }
+      .mat-img-accent { right: 0; }
+      .testi-grid { grid-template-columns: 1fr; }
+      .cta-final { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+    }
+    @media (max-width: 600px) {
+      .hero-left { padding: 3rem 6vw; }
+      .product-grid { grid-template-columns: 1fr; }
+      footer { grid-template-columns: 1fr; }
+      .form-row { flex-direction: column; }
+      .section-header { flex-direction: column; gap: .8rem; }
+    }
+
+    /* ── micro-anim ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .fade-up {
+        opacity: 0; transform: translateY(28px);
+        transition: opacity .65s ease, transform .65s ease;
+      }
+      .fade-up.visible { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-logo" href="#">TAILORS<span>NELCY</span></a>
+    <ul class="nav-links">
+      <li><a href="#proceso">Proceso</a></li>
+      <li><a href="#coleccion">Colección</a></li>
+      <li><a href="#materiales">Materiales</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+    </ul>
+    <a class="nav-cta" href="#contacto">Hacer mi encargo</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Sastrería contemporánea · las Bocas/cordoba, Colombia</p>
+      <h1 class="hero-title">
+        Ropa hecha<br>
+        <em>exactamente</em><br>
+        para ti.
+      </h1>
+      <p class="hero-body">
+        Cada prenda nace de una conversación. Elegimos juntos la tela, el corte, los detalles y nuestras manos hacen el resto. Sin tallas. Sin compromisos.
+      </p>
+      <div>
+        <a class="btn-primary" href="#contacto">Solicitar encargo</a>
+        <a class="btn-secondary" href="#coleccion">Ver colección</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <img
+        src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80"
+        alt="Diseñadora en taller de costura"
+        loading="eager"
+      />
+      <div class="hero-badge">
+        <strong>+400</strong>
+        <span>prendas entregadas</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section class="proceso" id="proceso">
+    <p class="proceso-label">Cómo funciona</p>
+    <div class="proceso-grid">
+      <div class="proceso-step fade-up">
+        <p class="paso-num">01</p>
+        <h3 class="paso-titulo">Conversamos</h3>
+        <p class="paso-desc">Nos cuentas qué quieres: la ocasión, el estilo, tus colores. Una consulta sin costo, sin presión.</p>
+      </div>
+      <div class="proceso-step fade-up">
+        <p class="paso-num">02</p>
+        <h3 class="paso-titulo">Elegimos la tela</h3>
+        <p class="paso-desc">Te presentamos muestras de nuestro catálogo de telas nacionales e importadas. Tú decides.</p>
+      </div>
+      <div class="proceso-step fade-up">
+        <p class="paso-num">03</p>
+        <h3 class="paso-titulo">Tomamos medidas</h3>
+        <p class="paso-desc">Presencial o por guía remota. Cada centímetro cuenta para que el ajuste sea perfecto.</p>
+      </div>
+      <div class="proceso-step fade-up">
+        <p class="paso-num">04</p>
+        <h3 class="paso-titulo">Te la entregamos</h3>
+        <p class="paso-desc">En 10 a 20 días hábiles tienes tu prenda lista, con una prueba intermedia si es necesario.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO -->
+  <section class="catalogo" id="coleccion">
+    <div class="section-header">
+      <h2 class="section-title">Lo que <em>creamos</em></h2>
+      <a class="see-all" href="#">Ver todo →</a>
+    </div>
+    <div class="product-grid">
+
+      <div class="product-card fade-up">
+        <span class="product-tag">Más pedido</span>
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=700&q=80" alt="Vestido de gala por encargo"/>
+        </div>
+        <p class="product-name">Vestido de gala</p>
+        <p class="product-desc">Seda natural · Corte a medida · Entretela artesanal</p>
+        <p class="product-price">Desde $380.000 COP</p>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1594938298603-c8148c4b4230?w=700&q=80" alt="Blazer sastre mujer"/>
+        </div>
+        <p class="product-name">Blazer sastre</p>
+        <p class="product-desc">Lana italiana · Solapas personalizadas · Forro interior</p>
+        <p class="product-price">Desde $290.000 COP</p>
+      </div>
+
+      <div class="product-card fade-up">
+        <span class="product-tag">Nuevo</span>
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?w=700&q=80" alt="Camisa bordada artesanal"/>
+        </div>
+        <p class="product-name">Camisa bordada</p>
+        <p class="product-desc">Algodón egipcio · Bordado a mano · Botones nácar</p>
+        <p class="product-price">Desde $175.000 COP</p>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=700&q=80" alt="Conjunto de dos piezas"/>
+        </div>
+        <p class="product-name">Conjunto dos piezas</p>
+        <p class="product-desc">Tejido jacquard · Set falda + top · Elástico regulable</p>
+        <p class="product-price">Desde $340.000 COP</p>
+      </div>
+
+      <div class="product-card fade-up">
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=700&q=80" alt="Abrigo de invierno por encargo"/>
+        </div>
+        <p class="product-name">Abrigo artesanal</p>
+        <p class="product-desc">Paño importado · Costuras reforzadas · Corte clásico</p>
+        <p class="product-price">Desde $520.000 COP</p>
+      </div>
+
+      <div class="product-card fade-up">
+        <span class="product-tag">Novias</span>
+        <div class="product-img-wrap">
+          <img src="https://images.unsplash.com/photo-1520316587275-5e4f06f355e3?w=700&q=80" alt="Vestido de novia exclusivo"/>
+        </div>
+        <p class="product-name">Vestido de novia</p>
+        <p class="product-desc">Encaje francés · Diseño exclusivo · 4 pruebas incluidas</p>
+        <p class="product-price">Desde $1.200.000 COP</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- MATERIALES -->
+  <section class="materiales" id="materiales">
+    <div class="mat-img-wrap">
+      <img src="https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=700&q=80" alt="Telas finas seleccionadas"/>
+      <div class="mat-img-accent">
+        <img src="https://images.unsplash.com/photo-1583396618422-56f5e5e57e53?w=400&q=80" alt="Detalle de hilo y aguja"/>
+      </div>
+    </div>
+    <div class="mat-content">
+      <p class="mat-eyebrow">Calidad que se siente</p>
+      <h2 class="mat-title">Telas que <em>cuentan</em> una historia</h2>
+      <p class="mat-body">
+        Trabajamos exclusivamente con proveedores nacionales certificados y distribuidores de telas europeas. Cada rollo pasa por nuestra selección antes de llegar a tus manos — porque la calidad no es un plus, es el punto de partida.
+      </p>
+      <ul class="mat-list">
+        <li>Lino y algodón orgánico colombiano</li>
+        <li>Sedas y satenes importados de Italia</li>
+        <li>Lanas y paños de temporada</li>
+        <li>Encajes artesanales y telas bordadas</li>
+        <li>Hilos y botones de primera calidad</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="testimonios" id="testimonios">
+    <h2 class="section-title">Lo que dicen <em>nuestras clientas</em></h2>
+    <div class="testi-grid">
+
+      <div class="testi-card fade-up">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Encargué mi vestido de grado y quedé sin palabras. El ajuste fue perfecto, como si hubiera nacido para mí. Jamás vuelvo a comprar en tienda.</p>
+        <p class="testi-author">Valentina R.</p>
+        <p class="testi-city">sahagun · Vestido de gala</p>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">El proceso fue súper fácil. Mandé una foto de referencia y ellas lo mejoraron. Mi blazer tiene detalles que no consigo en ninguna otra parte.</p>
+        <p class="testi-author">Camila T.</p>
+        <p class="testi-city">monteria · Blazer sastre</p>
+      </div>
+
+      <div class="testi-card fade-up">
+        <div class="testi-quote">"</div>
+        <p class="testi-text">Mi vestido de novia fue un sueño. Cuatro pruebas, paciencia infinita y un resultado que hizo llorar a toda mi familia. 100% recomendadas.</p>
+        <p class="testi-author">Sofía M.</p>
+        <p class="testi-city">sincelejo · Vestido de novia</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA CONTACTO -->
+  <section class="cta-final" id="contacto">
+    <h2 class="cta-title">
+      Tu próxima<br>
+      prenda favorita<br>
+      está a un mensaje <em>de distancia.</em>
+    </h2>
+    <div class="cta-right">
+      <p class="cta-body">
+        Cuéntanos tu idea. Sin compromiso, sin costo de consulta. Respondemos en menos de 24 horas.
+      </p>
+      <div class="form-row">
+        <input class="form-input" type="text" placeholder="Tu nombre"/>
+        <input class="form-input" type="tel" placeholder="WhatsApp / Teléfono"/>
+      </div>
+      <input class="form-input" type="email" placeholder="Correo electrónico" style="width:100%"/>
+      <textarea class="form-input form-textarea" placeholder="Cuéntanos qué tienes en mente..."></textarea>
+      <button class="btn-gold">Enviar mi solicitud</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>
+      <p class="footer-brand-name">TAILORS<span>NELCY</span></p>
+      <p class="footer-tagline">Ropa hecha por encargo · las Bocas, Colombia</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Servicios</p>
+      <ul>
+        <li><a href="#">Vestidos de gala</a></li>
+        <li><a href="#">Ropa formal</a></li>
+        <li><a href="#">Novias</a></li>
+        <li><a href="#">Uniformes</a></li>
+        <li><a href="#">Ropa casual</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <p class="footer-col-title">Info</p>
+      <ul>
+        <li><a href="#">Cómo funciona</a></li>
+        <li><a href="#">Tiempos de entrega</a></li>
+        <li><a href="#">Cuidado de prendas</a></li>
+        <li><a href="#">Preguntas frecuentes</a></li>
+      </ul>
+    </div>
+  </footer>
+  <div class="footer-bottom">
+    <p>© 2025 TAILORS NELCY. Todos los derechos reservados.</p>
+    <p>Hecho con amor en LAS Bocas 🇨🇴</p>
+  </div>
+
+  <script>
+    // Fade-up on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
